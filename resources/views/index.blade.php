@@ -4,16 +4,13 @@
     </head>
     <body>
         <div>
-        <a href="/hewan"><button><p>ELLEN</p></button></a>
-            <a href="/setinfo/dika"><button><p>DIKA</p></button></a>
-            <a href="/setinfo/ageng"><button><p>AGENG</p></button></a>
-            <a href="/setinfo/all"><button><p>SET INFO ALL</p></button></a>
             <a href="/denah"><button><p>Denah</p></button></a>
-            <a href="/new"><button><p>EVI</p></button></a>
-            <a href="/new"><button><p>EVI</p></button></a>
-            <a href="/new"><button><p>EVI</p></button></a>
+            <a href="/denah2"><button><p>Hamilton</p></button></a>
+            <a href="/ButTitik"><button><p>Buat Titik</p></button></a>
+            <a href="/new"><button><p>Buat Garis</p></button></a>
+            <a href="/setinfo/all"><button><p>Beri Nama</p></button></a>
         </div>
-        
+
     </body>
     <style>
         body{
@@ -38,7 +35,7 @@
             box-shadow: h-offset v-offset blur-radius spread-radius color 4px black;
             background-color: white
         }
-        
+
         body>div>a>button>p{
             padding: 0 0;
             margin: 0 0;

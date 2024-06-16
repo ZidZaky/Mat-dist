@@ -41,7 +41,7 @@
         </div>
         <div class="detilview">
 
-                <form action="/closest-Route" method="post">
+                <form action="/closest-Route2" method="post">
                         @csrf
                     <div>
                         <label for="">Lokasi apa yang ingin anda Tuju?</label>

@@ -6,22 +6,22 @@
         <title>Program Titik</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </head>
-    <body> 
-        
+    <body>
+
             @for($k=0;$k<count($show[1]);$k++)
                 @if($k==0)
-                <svg id="pinstart" xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="-0.5 0 25 25" fill="green" style="position: absolute; top:{{$show[1][$k][2]-30}}px; left:{{$show[1][$k][1]-15}}px; z-index:450;">
+                <svg id="pinstart" xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="-0.5 0 25 25" fill="green" style="position: absolute; top:{{$show[1][$k][2]-30}}px; left:{{$show[1][$k][1]-15+20}}px; z-index:450;">
                     <path d="M3 11.3201C3 8.93312 3.94822 6.64394 5.63605 4.95612C7.32387 3.26829 9.61305 2.32007 12 2.32007C14.3869 2.32007 16.6762 3.26829 18.364 4.95612C20.0518 6.64394 21 8.93312 21 11.3201" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M3 11.3201C3 17.4201 9.76 22.3201 12 22.3201C14.24 22.3201 21 17.4201 21 11.3201" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M12 15.3201C14.2091 15.3201 16 13.5292 16 11.3201C16 9.11093 14.2091 7.32007 12 7.32007C9.79086 7.32007 8 9.11093 8 11.3201C8 13.5292 9.79086 15.3201 12 15.3201Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 @endif
                 @if($k!=count($show[1])-1)
-                    <button id="ruteTitiks" class="titikRute"  style="position: absolute; top:{{$show[1][$k][2]}}px; left:{{$show[1][$k][1]}}px; z-index:400;"><p>{{$show[1][$k][0]}}</p></button>
+                    <button id="ruteTitiks" class="titikRute"  style="position: absolute; top:{{$show[1][$k][2]}}px; left:{{$show[1][$k][1]+20}}px; z-index:400;"><p>{{$show[1][$k][0]}}</p></button>
                 @else
-                    <button id="ruteTitiks" class="titikRute"  style="position: absolute; top:{{$show[1][$k][2]}}px; left:{{$show[1][$k][1]}}px; z-index:400;"><p>{{$show[1][$k][0]}}</p></button>
-                    <button id="ruteTitiks" class="titikRute"  style="position: absolute; top:{{$show[1][$k][5]}}px; left:{{$show[1][$k][4]}}px; z-index:400;"><p>{{$show[1][$k][3]}}</p></button>
-                    <svg id="pinstart" xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="-0.5 0 25 25" fill="blue" style="position: absolute; top:{{$show[1][$k][5]-30}}px; left:{{$show[1][$k][4]-15}}px; z-index:450;">
+                    <button id="ruteTitiks" class="titikRute"  style="position: absolute; top:{{$show[1][$k][2]}}px; left:{{$show[1][$k][1]+20}}px; z-index:400;"><p>{{$show[1][$k][0]}}</p></button>
+                    <button id="ruteTitiks" class="titikRute"  style="position: absolute; top:{{$show[1][$k][5]}}px; left:{{$show[1][$k][4]+20}}px; z-index:400;"><p>{{$show[1][$k][3]}}</p></button>
+                    <svg id="pinstart" xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="-0.5 0 25 25" fill="blue" style="position: absolute; top:{{$show[1][$k][5]-30}}px; left:{{$show[1][$k][4]-15+20}}px; z-index:450;">
                         <path d="M3 11.3201C3 8.93312 3.94822 6.64394 5.63605 4.95612C7.32387 3.26829 9.61305 2.32007 12 2.32007C14.3869 2.32007 16.6762 3.26829 18.364 4.95612C20.0518 6.64394 21 8.93312 21 11.3201" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M3 11.3201C3 17.4201 9.76 22.3201 12 22.3201C14.24 22.3201 21 17.4201 21 11.3201" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M12 15.3201C14.2091 15.3201 16 13.5292 16 11.3201C16 9.11093 14.2091 7.32007 12 7.32007C9.79086 7.32007 8 9.11093 8 11.3201C8 13.5292 9.79086 15.3201 12 15.3201Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -31,26 +31,26 @@
 
             <svg class="lines" width="130vh" height="97vh" style="border:1px white solid; position:fixed; z-index:300;">
                 @foreach($show[1] as $line)
-                <line x1="{{(($line[1])-362)}}" y1="{{$line[2]-10}}" x2="{{(($line[4])-362)}}" y2="{{$line[5]-10}}" style="stroke: blue ;stroke-width:2;" />
+                <line x1="{{(($line[1])-362+10)}}" y1="{{$line[2]-10}}" x2="{{(($line[4])-362+10)}}" y2="{{$line[5]-10}}" style="stroke: blue ;stroke-width:2;" />
                 @endforeach
             </svg>
-            
-            
-       
+
+
+
         <div style="display:flex; gap:20vh; flex-direction: row; align-items:center; justify-content:center; width:100%;">
             <div id="fotoArea">
-                <img src="/foto/flat.png" alt="Foto" id="foto" onclick="tandaiTitik(event)" style="display:; z-index:1 !important;">
-                
+                <img src="/foto/Map.png" alt="Foto" id="foto" onclick="tandaiTitik(event)" style="display:; z-index:1 !important;">
+
             </div>
-            
+
         </div>
-        
-        
+
+
         <!-- <div>
             <p>daftar Hewan atau Tempat yang dekat</p>
 
         </div> -->
-        
+
     </body>
     <style>
             .hewan {
@@ -79,7 +79,7 @@
 
         </style>
 
-            
+
             <style>
                 .detilinfo{
                     position: absolute;
@@ -88,7 +88,7 @@
                     width: 10%;
                     background-color: #333;
                     padding: 4px;
-                    
+
                 }
                 .detilinfo>div{
                     display: flex;
@@ -125,13 +125,13 @@
                 top:2vh;
             }
             .navbar>a{
-                
+
             }
             html::-webkit-scrollbar{
                 width: 0;
             }
             #ruteTitiks{
-                
+
                 color:white;
                 background-color: greenyellow;
                 -webkit-text-stroke: 0.6px black;
@@ -143,7 +143,7 @@
                 margin: 0 0;
             }
             #butTitiks{
-                
+
                 color:white;
                 background-color: grey;
                 -webkit-text-stroke: 0.6px black;
@@ -154,10 +154,10 @@
                 padding: 0 0;
                 margin: 0 0;
             }
-            
-            
-            
-            
+
+
+
+
             form{
                 display: flex;
                 flex-direction: column;

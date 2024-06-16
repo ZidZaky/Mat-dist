@@ -23,7 +23,7 @@ class TitikController extends Controller
 
     public function store(Request $request)
 {
-    
+
     // dd($request->garisx1);
     // Simpan hanya nama dan jarak dalam database
     $request->validate([
@@ -58,10 +58,10 @@ class TitikController extends Controller
     }
     public function CallAllLine(){
         $result = DB::table('titiks as q')->select(
-            'q.TitikAwal','d.xDot as x1','d.yDot as y1','q.TitikAkhir','e.xDot as x2','e.yDOt as y2'
+            'q.TitikAwal','d.xDot as x1','d.yDot as y1','q.TitikAkhir','e.xDot as x2','e.yDOt as y2','q.jarak as jarak'
         )->join('but_titiks as d','d.Nama','=','q.TitikAwal')->join('but_titiks as e','e.Nama','=','q.TitikAkhir')->get();
         // dd($result);
-        
+
         return $result;
     }
 
@@ -80,6 +80,7 @@ class TitikController extends Controller
         // convert data sql to that shape
         $ary = [];
         $all = $this->CallAllLine();
+        // dd($all);
         // $toArry = get_object_vars($all);
         // dd(count($all));
         // dd($all[0]);
@@ -88,6 +89,8 @@ class TitikController extends Controller
             array_push($ary,array());
             array_push($ary[$s],$all[$s]->TitikAwal);
             array_push($ary[$s],$all[$s]->TitikAkhir);
+            array_push($ary[$s],$all[$s]->jarak);
+
         }
         return $ary;
 
@@ -96,17 +99,17 @@ class TitikController extends Controller
     //     $f = $this->LookTetangga("r",[]);
     // }
 
-    
+
 
 
     public function FindRute($tujuan,$Awal){
         set_time_limit(500);
 
-        // Definisikan data 
+        // Definisikan data
 
         // Definisikan data garis-garis yang xtersedia
-        
-        
+
+
         // Panggil fungsi untuk mencari 5 jalur terpendek dari titik AA ke titik BN
         $lines = $this->AllLineArray();
         $shortestPaths = $this->findShortestPaths($lines, $tujuan, $Awal);
@@ -123,11 +126,11 @@ class TitikController extends Controller
                     $datajrk[$htg9]=$datajrk[$htg9]+$jrk[0]->jarak;
                 }
 
-                
+
             }
             $htg9 = $htg9+1;
         }
-        
+
         $back = [];
         foreach($shortestPaths as $rute){
             $ary = [];
@@ -141,8 +144,8 @@ class TitikController extends Controller
         // dd($back);
         $trullyBack = [];
         $rilback = 0;
-        $index = 0;  
-        $itg = 0; 
+        $index = 0;
+        $itg = 0;
         foreach($back as $b){
             if($rilback==0){
                 $rilback = $b[1];
@@ -165,27 +168,27 @@ class TitikController extends Controller
 
         // dd($datajrk);
         // $this->brpjrk("AX","AT");
-        
-    
+
+
     }
     public function findShortestPaths($lines, $start, $end) {
         // Inisialisasi antrian prioritas dengan jalur awal
         $queue = [[$start]];
         $shortestPaths = [];
-    
+
         // Selama antrian tidak kosong dan belum menemukan jalur terpendek
-        while (!empty($queue) && count($shortestPaths) < 3) {
+        while (!empty($queue) && count($shortestPaths) < 1) {
             // Ambil jalur pertama dari antrian
             $path = array_shift($queue);
             $currentNode = end($path);
-    
+
             // Jika jalur saat ini mencapai titik akhir
             if ($currentNode == $end) {
                 // Tambahkan jalur ke daftar jalur terpendek
                 $shortestPaths[] = $path;
                 continue;
             }
-    
+
             // Loop melalui semua garis
             foreach ($lines as $line) {
                 // Jika titik awal garis sama dengan titik saat ini
@@ -205,15 +208,67 @@ class TitikController extends Controller
                     $queue[] = $newPath;
                 }
             }
-    
+
             // Urutkan antrian prioritas berdasarkan panjang jalur (semakin pendek, semakin awal)
             usort($queue, function($a, $b) {
                 return count($a) <=> count($b);
             });
         }
-        
+
         return $shortestPaths;
-    } 
+    }
+
+    public function findHamiltonianPath($graph, $start) {
+        $path = [];
+        $visited = [];
+
+        // Initialize the path and visited array
+        foreach ($graph as $vertex => $edges) {
+            $visited[$vertex] = false;
+        }
+
+        // Start from the initial vertex
+        $path[] = $start;
+        $visited[$start] = true;
+
+        // Call the utility function to find the Hamiltonian Path
+        if ($this->hamiltonianPathUtil($graph, $path, $visited, count($graph))) {
+            return $path;
+        } else {
+            return null; // No Hamiltonian Path found
+        }
+    }
+
+    private function hamiltonianPathUtil($graph, &$path, &$visited, $totalVertices) {
+        // Base case: If the path contains all vertices, return true
+        if (count($path) == $totalVertices) {
+            return true;
+        }
+
+        // Get the last vertex in the current path
+        $currentVertex = end($path);
+
+        // Explore all adjacent vertices
+        foreach ($graph[$currentVertex] as $adjacent) {
+            if (!$visited[$adjacent]) {
+                // Mark the vertex as visited and add it to the path
+                $visited[$adjacent] = true;
+                $path[] = $adjacent;
+
+                // Recursively call the utility function to continue the path
+                if ($this->hamiltonianPathUtil($graph, $path, $visited, $totalVertices)) {
+                    return true;
+                }
+
+                // Backtrack: Remove the vertex from the path and mark it as unvisited
+                array_pop($path);
+                $visited[$adjacent] = false;
+            }
+        }
+
+        return false;
+    }
+
     public function go(){
         $this->getLiness("CK","CL");
     }
@@ -232,10 +287,10 @@ class TitikController extends Controller
             // dd($results);
         return $results;
     }
-    
-    
 
-    
+
+
+
 
     public function teslagi(){
         // $this->CB("AA","BN");
@@ -243,9 +298,9 @@ class TitikController extends Controller
         $this->apanih();
         // $this->AllLineArray();
     }
-    
+
     public function getLiness($titikAwals,$titikAkhirs){
-        $results = Titik::select('TitikAwal as t1', 'bt1.xDot as x1', 'bt1.yDot as y1', 'TitikAkhir as t2', 'bt2.xDot as x2', 'bt2.yDot as y2')
+        $results = Titik::select('TitikAwal as t1', 'bt1.xDot as x1', 'bt1.yDot as y1', 'TitikAkhir as t2', 'bt2.xDot as x2', 'bt2.yDot as y2','jarak as Jarak')
         ->join('but_titiks as bt1', 'bt1.Nama', '=', 'TitikAwal')
         ->join('but_titiks as bt2', 'bt2.Nama', '=', 'TitikAkhir')
         ->where(function ($query) use ($titikAwals, $titikAkhirs) {
@@ -276,9 +331,9 @@ class TitikController extends Controller
         array_push($back,$results[0]->t1);
         array_push($back,$results[0]->x1);
         array_push($back,$results[0]->y1);
-        
+
     }
-    // dd($back);
+    // dd($back."back");
     return $back;
     }
 }

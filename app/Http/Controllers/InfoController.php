@@ -53,6 +53,22 @@ class InfoController extends Controller
         // dd($titiks);
         return view('finalPage',['titiks'=>$titiks,'lines'=>$Lines,'hewans'=>$hewans,'arys'=>$arys,'butInfos'=>$butInfo,'butfill'=>[]]);
     }
+
+    public function final2(){
+        $ButTitiks = new ButTitikController();
+        $titikss = new TitikController();
+        $hew = new HewanController();
+        $info = new InfoController();
+        $Lines = $titikss->all();
+        $hewans = $hew->all();
+        // dd($titiks);
+        $titiks= $ButTitiks->all();
+        $arys = $info->GetAllInfo();
+        $butInfo = $ButTitiks->GetTitikBut();
+        // dd($titiks,$arys,$butInfo);
+        // dd($titiks);
+        return view('finalPage2',['titiks'=>$titiks,'lines'=>$Lines,'hewans'=>$hewans,'arys'=>$arys,'butInfos'=>$butInfo,'butfill'=>[]]);
+    }
     public function Rute(Request $request)
     {
         // dd($request);
@@ -116,6 +132,122 @@ class InfoController extends Controller
 
 
 
+    }
+
+    public function RuteHamilton(Request $request) {
+        $request->validate([
+            'inpTujuan' => 'required',
+            'inpAwal' => 'required'
+        ]);
+
+        // $tujuan = $this->getTitikTujuan($request->inpTujuan);
+        $tc = new TitikController();
+        // $graph = $tc->getGraph(); // Assuming you have a function to get the graph structure
+        // dd($graph);
+        $tc = new TitikController();
+        $lines = $tc->AllLineArray();
+        // dd($lines);
+        $graph = $this->buildGraph($lines);
+        $start = 'EU';
+        $end = "EZ";
+        set_time_limit(240);
+        $path = $this->findHamiltonianPath($graph,$start,$end);
+        dd("path",$path);
+        // $start = $request->inpAwal;
+        // $path = $this->findHamiltonianPath($graph, $start);
+
+        // if ($path) {
+        //     // Prepare data for the view as done in the original Rute function
+        //     $back = [];
+        //     array_push($back, $path);
+        //     $dataLines = [];
+
+        //     for ($i = 0; $i < count($path) - 1; $i++) {
+        //         $dataline = $tc->getLiness($path[$i], $path[$i + 1]);
+        //         array_push($dataLines, $dataline);
+        //     }
+
+        //     array_push($back, $dataLines);
+
+        //     $ButTitiks = new ButTitikController();
+        //     $titikss = new TitikController();
+        //     $hew = new HewanController();
+        //     $Lines = $titikss->all();
+        //     $hewans = $hew->all();
+        //     $titiks = $ButTitiks->all();
+        //     $arys = $this->GetAllInfo();
+        //     $ShowLines = $back;
+
+        //     return view('rute', ['show' => $ShowLines, 'Lines' => $Lines]);
+        // } else {
+        //     return view('rute', ['show' => null, 'Lines' => []])->with('error', 'No Hamiltonian Path found');
+        // }
+
+
+    }
+
+    function isSafe($v, $graph, $path, $pos) {
+        if (!isset($graph[$path[$pos - 1]][$v])) {
+            return false;
+        }
+        // dd($pos);
+
+        for ($i = 0; $i < $pos; $i++) {
+            if ($path[$i] == $v) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function hamiltonianUtil($graph, &$path, $pos, $end) {
+        $V = count($graph);
+
+        if ($pos == $V) {
+            return $path[$pos - 1] == $end;
+        }
+
+        foreach (array_keys($graph) as $v) {
+            if ($this->isSafe($v, $graph, $path, $pos)) {
+                $path[$pos] = $v;
+
+                if ($this->hamiltonianUtil($graph, $path, $pos + 1, $end)) {
+                    return true;
+                }
+
+                $path[$pos] = -1;
+            }
+        }
+
+        return false;
+    }
+
+    function findHamiltonianPath($graph, $start, $end) {
+        $path = array_fill(0, count($graph), -1);
+        $path[0] = $start;
+
+        if (!$this->hamiltonianUtil($graph, $path, 1, $end)) {
+            return false;
+        }
+
+        return $path;
+    }
+
+    function buildGraph($edges) {
+        $graph = [];
+        foreach ($edges as $edge) {
+            list($start, $end, $distance) = $edge;
+            if (!isset($graph[$start])) {
+                $graph[$start] = [];
+            }
+            if (!isset($graph[$end])) {
+                $graph[$end] = [];
+            }
+            $graph[$start][$end] = $distance;
+            $graph[$end][$start] = $distance;
+        }
+        return $graph;
     }
 
 
