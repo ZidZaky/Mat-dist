@@ -49,6 +49,8 @@ class InfoController extends Controller
         $titiks= $ButTitiks->all();
         $arys = $info->GetAllInfo();
         $butInfo = $ButTitiks->GetTitikBut();
+        // dd($titiks,$arys,$butInfo);
+        // dd($titiks);
         return view('finalPage',['titiks'=>$titiks,'lines'=>$Lines,'hewans'=>$hewans,'arys'=>$arys,'butInfos'=>$butInfo,'butfill'=>[]]);
     }
     public function Rute(Request $request)
@@ -97,7 +99,7 @@ class InfoController extends Controller
             }
         }
         array_push($back,$dataLines);
-        
+
 
         //persiapan masuk page
         $ButTitiks = new ButTitikController();
@@ -109,15 +111,15 @@ class InfoController extends Controller
         $titiks= $ButTitiks->all();
         $arys = $this->GetAllInfo();
         $ShowLines = $back;
-        
+
         return view('rute',['show' => $ShowLines,'Lines'=>$Lines]);
 
-        
-        
+
+
     }
 
-    
-    
+
+
     public function getTitikTujuan($lokasi){
         $titik = Info::select('Titik')
             ->where('Lokasi_atau_hewan', $lokasi)
@@ -147,7 +149,7 @@ class InfoController extends Controller
             $titik->Lokasi_atau_hewan = $r;
             $titik->save();
         }
-        
+
 
         return redirect('/setinfo/'.$siapa);
     }
@@ -175,8 +177,8 @@ class InfoController extends Controller
         }
         // dd($arys);
         return $arys;
-        
-        
+
+
     }
     public function getinfo($titik){
         $results = Info::where('Titik', $titik)

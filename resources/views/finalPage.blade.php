@@ -32,12 +32,12 @@
                     <?php $butfill = []; ?>
                         @foreach($titiks as $titik)
                                     <button onclick="fillAsal('{{$titik->Nama}}')">{{$titik->Nama}}</button>
-                        @endforeach        
-                        
+                        @endforeach
+
 
                     </div>
             </div>
-            
+
         </div>
         <div class="detilview">
 
@@ -52,14 +52,14 @@
                         <input type="text" name="inpAwal" onclick="showtable('awal')" id="tableAsal" value="" placeholder="klik untuk memilih">
                     </div>
                     <input type="submit" value="Cari Rute">
-                
+
 
                 </form>
         </div>
         <div class="moreDetil">
 
         </div>
-        
+
         <div class="denah">
             <div class="butArea" style="">
             <?php $butfill = []; ?>
@@ -76,8 +76,8 @@
 
             <div style="display:flex; gap:20vh; flex-direction: row; align-items:center; justify-content:center; width:100%;">
                 <div id="fotoArea">
-                    <img src="/foto/flat.png" alt="Foto" id="foto" onclick="tandaiTitik(event)" style="display:; z-index:1 !important;">
-                    
+                    <img src="/foto/Map.png" alt="Foto" id="foto" onclick="tandaiTitik(event)" style="display:; z-index:-100 !important;">
+
                 </div>
             </div>
         </div>
@@ -167,8 +167,8 @@
         form>input:hover{
             background-color: #0056b3;
         }
-        
-        
+
+
 
     </style>
     <style>
@@ -248,7 +248,7 @@
             color: white;
         }
         .content button {
-            padding: 10px 10px; 
+            padding: 10px 10px;
             height: 45px;
             border: none; /* Remove default button border */
             border-radius: 5px; /* Rounded corners */
@@ -295,7 +295,7 @@
 
     </style>
 
-        
+
         <style>
             .detilinfo{
                 position: absolute;
@@ -304,7 +304,7 @@
                 width: 10%;
                 background-color: #333;
                 padding: 4px;
-                
+
             }
             .detilinfo>div{
                 display: flex;
@@ -341,13 +341,13 @@
             top:2vh;
         }
         .navbar>a{
-            
+
         }
         html::-webkit-scrollbar{
             width: 0;
         }
         #butTitiks{
-             
+
             color:white;
             /* background-color: greenyellow; */
             -webkit-text-stroke: 0.6px black;
@@ -358,13 +358,13 @@
             padding: 0 0;
             margin: 0 0;
         }
-        
-        
+
+
         .Tititik{
 
         }
-        
-        
+
+
         #fotoArea{
             width: 130vh;
             height: 97vh;
@@ -393,9 +393,9 @@
         body>div>*{
             /* border: 1px white solid; */
         }
-        
 
-        
+
+
 
     </style>
     <script>
@@ -449,8 +449,8 @@
         //     document.getElementById(inputId).addEventListener('input', function() {
         //         const searchQuery = this.value.toLowerCase();
         //         const buttons = document.querySelectorAll(`#$content>button`);
-                
-                
+
+
         //         buttons.forEach(button => {
         //             const buttonText = button.textContent.toLowerCase();
         //             if (buttonText.includes(searchQuery)) {
@@ -467,7 +467,7 @@
         // document.querySelector('.cari').addEventListener('input', function() {
         //         const searchQuery = this.value.toLowerCase();
         //         const buttons = document.querySelectorAll('.content button');
-                
+
         //         buttons.forEach(button => {
         //             const buttonText = button.textContent.toLowerCase();
         //             if (buttonText.includes(searchQuery)) {
@@ -487,7 +487,7 @@
             else{
                 inp.value=inp.value+","+hewan;
             }
-            
+
         }
         document.addEventListener('keydown', function(e){
             if(e.key === 'Enter'){
@@ -522,9 +522,9 @@
                 inpdetil.style.display="flex";
 
             // console.log('x: ',x,", y: ",y);
-            
-        }   
-        
+
+        }
+
         let titik = [];
         function ganti(what){
             let buttonGanti = document.getElementById('gantiBut');
@@ -570,18 +570,18 @@
             const y1 = u1[1];
             const x2 = u2[0];
             const y2 = u2[1];
-            
+
             // Calculate the differences
             const dx = x2 - x1;
             const dy = y2 - y1;
-            
+
             // Calculate the Euclidean distance
             const distance = Math.sqrt(dx * dx + dy * dy);
             console.log('distance : '+distance);
-            return distance;    
-          
+            return distance;
+
         };
-        
+
 
     </script>
 </body>

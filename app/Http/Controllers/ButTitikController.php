@@ -17,7 +17,7 @@ class ButTitikController extends Controller
     public function all(){
         $titik = ButTitik::all();
         // dd($titik);
-        
+
         return $titik;
     }
 
@@ -48,7 +48,7 @@ class ButTitikController extends Controller
 
     public function store(Request $request)
     {
-        
+
         // dd($request->garisx1);
         // Simpan hanya nama dan jarak dalam database
         $request->validate([
@@ -71,8 +71,8 @@ class ButTitikController extends Controller
         $back = null;
             for($i=0;$i<count($array);$i++){
                 // dd($abjad);
-                if($this->check("E".$array[$i])!=true){
-                    $back = "E".$array[$i];
+                if($this->check("B".$array[$i])!=true){
+                    $back = "B".$array[$i];
 
                     // dd($back);
                 }

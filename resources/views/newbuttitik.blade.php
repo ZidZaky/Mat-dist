@@ -9,10 +9,10 @@
     @foreach($titiks as $titik)
         <button id="butTitiks"  style="position: absolute; top:{{$titik['yDot']}}px; left:{{$titik['xDot']}}px;z-index:600;">{{$titik['Nama']}}</button>
     @endforeach
-    
+
     <div style="display:flex; gap:20vh; flex-direction: row; align-items:center; justify-content:center; width:100%;">
         <div id="fotoArea">
-            <img src="/foto/a2.png" alt="Foto" id="foto" onclick="tandaiTitik(event)" style="display:; z-index:1 !important;">
+            <img src="/foto/Map.png" alt="Foto" id="foto" onclick="tandaiTitik(event)" style="display:; z-index:1 !important;">
             <img src="/foto/kosongan.png" alt="Foto" id="cekGaris" onclick="tandaiTitik(event)" style="display: none;">
         </div>
         <div style="display: flex; flex-direction:column;">
@@ -26,9 +26,9 @@
                 <button type="submit">Simpan</button>
             </form>
         </div>
-        
+
     </div>
-    
+
     <style>
         html::-webkit-scrollbar{
             width: 0;
@@ -94,7 +94,7 @@
     </style>
 
     <script>
-        
+
         let titik = [];
         function ganti(what){
             let buttonGanti = document.getElementById('gantiBut');
@@ -138,18 +138,18 @@
             const y1 = u1[1];
             const x2 = u2[0];
             const y2 = u2[1];
-            
+
             // Calculate the differences
             const dx = x2 - x1;
             const dy = y2 - y1;
-            
+
             // Calculate the Euclidean distance
             const distance = Math.sqrt(dx * dx + dy * dy);
             console.log('distance : '+distance);
-            return distance;    
-          
+            return distance;
+
         };
-        
+
 
     </script>
 </body>

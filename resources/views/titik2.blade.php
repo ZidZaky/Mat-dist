@@ -7,7 +7,7 @@
 </head>
 <body >
     @foreach($titiks as $titik)
-        
+
         <button id="butTitiks" class="Tititik" onclick="isi({{$titik['xDot']}},{{$titik['yDot']}},'{{$titik['Nama']}}')" style="position: absolute; top:{{$titik['yDot']}}px; left:{{$titik['xDot']}}px;z-index:400;"><p>{{$titik['Nama']}}</p></button>
     @endforeach
         <svg class="lines" width="130vh" height="97vh" style="border:1px white solid; position:fixed; z-index:300;">
@@ -15,10 +15,10 @@
             <line x1="{{(($line->x1)-362)}}" y1="{{$line->y1-10}}" x2="{{(($line->x2)-362)}}" y2="{{$line->y2-10}}" style="stroke: blue ;stroke-width:2;" />
         @endforeach
         </svg>
-    
+
     <div style="display:flex; gap:20vh; flex-direction: row; align-items:center; justify-content:center; width:100%;">
         <div id="fotoArea">
-            <img src="/foto/a2.png" alt="Foto" id="foto" onclick="tandaiTitik(event)" style="display:; z-index:1 !important;">
+            <img src="/foto/Map.png" alt="Foto" id="foto" onclick="tandaiTitik(event)" style="display:; z-index:1 !important;">
             <img src="/foto/kosongan.png" alt="Foto" id="cekGaris" onclick="tandaiTitik(event)" style="display: none;">
         </div>
         <div style="display: flex; flex-direction:column;">
@@ -44,7 +44,7 @@
             <a href="/new"><button>BUAT LINE</button></a>
         </div>
     </div>
-    
+
     <style>
         .lines{
             width: 130vh;
@@ -62,13 +62,13 @@
             top:2vh;
         }
         .navbar>a{
-            
+
         }
         html::-webkit-scrollbar{
             width: 0;
         }
         #butTitiks{
-             
+
             color:white;
             background-color: greenyellow;
             -webkit-text-stroke: 0.3px black;
@@ -86,7 +86,7 @@
         .Tititik{
 
         }
-        
+
         form{
             display: flex;
             flex-direction: column;
@@ -168,7 +168,7 @@
             }
             press = press+1;
         }
-        
+
         let titik = [];
         function ganti(what){
             let buttonGanti = document.getElementById('gantiBut');
@@ -214,18 +214,18 @@
             const y1 = u1[1];
             const x2 = u2[0];
             const y2 = u2[1];
-            
+
             // Calculate the differences
             const dx = x2 - x1;
             const dy = y2 - y1;
-            
+
             // Calculate the Euclidean distance
             const distance = Math.sqrt(dx * dx + dy * dy);
             console.log('distance : '+distance);
-            return distance;    
-          
+            return distance;
+
         };
-        
+
 
     </script>
 </body>

@@ -14,11 +14,11 @@
             <line x1="{{(($line->x1)-362)}}" y1="{{$line->y1-10}}" x2="{{(($line->x2)-362)}}" y2="{{$line->y2-10}}" style="stroke: blue ;stroke-width:2;" />
         @endforeach
         </svg>
-    
+
     <div style="display:flex; gap:20vh; flex-direction: row; align-items:center; justify-content:center; width:100%;">
         <div id="fotoArea">
-            <img src="/foto/flat.png" alt="Foto" id="foto" onclick="tandaiTitik(event)" style="display:; z-index:1 !important;">
-            
+            <img src="/foto/Map.png" alt="Foto" id="foto" onclick="tandaiTitik(event)" style="display:; z-index:1 !important;">
+
         </div>
         <div style="display: flex; flex-direction:column;">
             <button class="cek" id="gantiBut" onclick="ganti('kosong')">CEK GARIS</button>
@@ -41,7 +41,7 @@
             <button onclick="isiHewan('{{$hew->namaHewan}}')">{{$hew->namaHewan}}</button>
             @endforeach
         </div>
-        
+
     </div>
     <div class="detilinfo">
         @foreach($arys as $ary)
@@ -116,7 +116,7 @@
         }
     </style>
 
-        
+
         <style>
             .detilinfo{
                 position: absolute;
@@ -125,7 +125,7 @@
                 width: 10%;
                 background-color: #333;
                 padding: 4px;
-                
+
             }
             .detilinfo>div{
                 display: flex;
@@ -162,13 +162,13 @@
             top:2vh;
         }
         .navbar>a{
-            
+
         }
         html::-webkit-scrollbar{
             width: 0;
         }
         #butTitiks{
-             
+
             color:white;
             background-color: greenyellow;
             -webkit-text-stroke: 0.6px black;
@@ -179,12 +179,12 @@
             padding: 0 0;
             margin: 0 0;
         }
-        
-        
+
+
         .Tititik{
 
         }
-        
+
         form{
             display: flex;
             flex-direction: column;
@@ -274,7 +274,7 @@ form input:focus {
             else{
                 inp.value=inp.value+","+hewan;
             }
-            
+
         }
         document.addEventListener('keydown', function(e){
             if(e.key === 'Enter'){
@@ -309,9 +309,9 @@ form input:focus {
                 inpdetil.style.display="flex";
 
             // console.log('x: ',x,", y: ",y);
-            
-        }   
-        
+
+        }
+
         let titik = [];
         function ganti(what){
             let buttonGanti = document.getElementById('gantiBut');
@@ -357,18 +357,18 @@ form input:focus {
             const y1 = u1[1];
             const x2 = u2[0];
             const y2 = u2[1];
-            
+
             // Calculate the differences
             const dx = x2 - x1;
             const dy = y2 - y1;
-            
+
             // Calculate the Euclidean distance
             const distance = Math.sqrt(dx * dx + dy * dy);
             console.log('distance : '+distance);
-            return distance;    
-          
+            return distance;
+
         };
-        
+
 
     </script>
 </body>
